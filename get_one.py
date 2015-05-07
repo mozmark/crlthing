@@ -1,6 +1,8 @@
 from fetch_all import fetchCRL, parseCRL, getRevokedSerials
+import sys
 
-crlURI = 'http://crl.pki.fraunhofer.de/fhg-root-ca-2007.crl'
+crlURI = sys.argv[1]
+print crlURI
 issuer, serials = getRevokedSerials(parseCRL(fetchCRL(crlURI)))
 print issuer
 for serial in serials:
