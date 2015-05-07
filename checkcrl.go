@@ -3,6 +3,8 @@ package main
 import (
   "crypto/x509"
   "crypto/x509/pkix"
+  "encoding/asn1"
+  "encoding/base64"
   "encoding/pem"
   "flag"
   "fmt"
@@ -114,8 +116,19 @@ func main() {
       }
 
       if _,err := signer.Verify(opts); err != nil {
-        panic("can't verify signer")
+        fmt.Println("Warning! Can't verify signer!")
       }
+    }
+
+    issuerData, err := asn1.Marshal(crl.TBSCertList.Issuer)
+    if nil == err {
+      issuerString := base64.StdEncoding.EncodeToString(issuerData)
+      fmt.Printf("%v\n", issuerString);
+    }
+    for revoked := range crl.TBSCertList.RevokedCertificates {
+      cert := crl.TBSCertList.RevokedCertificates[revoked]
+      fmt.Printf(" %v\n",
+                 base64.StdEncoding.EncodeToString(cert.SerialNumber.Bytes()))
     }
   }
 }
