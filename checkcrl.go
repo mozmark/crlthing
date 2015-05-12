@@ -52,7 +52,7 @@ func findSigningCert(certs []*x509.Certificate, crl *pkix.CertificateList) *x509
       return cert
     }
   }
-  return nil;
+  return nil
 }
 
 func main() {
