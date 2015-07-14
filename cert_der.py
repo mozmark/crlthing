@@ -10,6 +10,7 @@ Get a byte array for an ASN1 integer
 """
 def getASNIntegerBytes(asnInt):
     hexstr = "%X" % (int(asnInt))
+    print "hex string is ",hexstr
     if len(hexstr) % 2 == 1:
         return unhexlify('0'+hexstr)
     return unhexlify(hexstr)

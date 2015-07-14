@@ -94,7 +94,7 @@ func main() {
 
     // check the CRL is still current
     if crl.HasExpired(time.Now()) {
-      fmt.Printf("crl has expired\n");
+      fmt.Printf("crl has expired\n")
     }
 
     var signer *x509.Certificate
